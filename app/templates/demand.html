@@ -42,15 +42,8 @@
                 <li class="active ">
                     <a href="/demand">
                         <i class="nc-icon nc-credit-card"></i>
-                        <p class="capitalize">Demand</p>
+                        <p class="capitalize">Demand / Profit</p>
                     </a>
-                </li>
-                <li>
-                    <a href="/profit">
-                        <i class="nc-icon nc-money-coins"></i>
-                        <p class="capitalize">Profit</p>
-                    </a>
-                </li>
             </ul>
         </div>
     </div>
@@ -68,7 +61,7 @@
                     </div>
                     <a class="navbar-brand" href="javascript:;">
                         <i class="nc-icon nc-credit-card"></i>
-                        <p class="capitalize">Demand</p>
+                        <p class="capitalize">Demand / Profit</p>
                     </a>
                 </div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
@@ -105,7 +98,7 @@
                             <form id='submit_params' method="POST"
                                   action="{{ url_for('demand') }}">
 
-                                <label for="metric" class="" style="color: black; text-indent: -57px;"><div class="selector">Metric</div><select
+                                <label for="metric" class="" style="color: black; text-indent: -44px;"><div class="selector">Product</div><select
                                         class="metric"
                                         id="metric"
                                         aria-labelledby="navbarDropdownMenuLink"
@@ -119,7 +112,21 @@
 
                                 </select></label>
 
-                                <button href="" class="btn btn-primary btn-darkblue" type="submit" style="right: -200px;">
+                                <label for="plot" class="" style="color: black; text-indent: -70px;"><div class="selector">D/P</div><select
+                                    class="metric"
+                                    id="plot"
+                                    aria-labelledby="navbarDropdownMenuLink"
+                                    name="plot"
+                                    type="submit">
+
+                                <option value="{{s_plot}}" selected>{{front_s_plot}}</option>
+                                {%for i in range(0, plots_len)%}
+                                <option value={{plots[i]}}>{{front_plots[i]}}</option>
+                                {%endfor%}
+
+                            </select></label>
+
+                                <button href="" class="btn btn-primary btn-darkblue" type="submit" style="left: 50px;">
                                     Filter
                                 </button>
                             </form>

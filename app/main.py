@@ -10,14 +10,21 @@ from tools.plots import PLOT_FUNCTIONS
 app = Flask(__name__)
 app.secret_key = 'database_key'
 
+
+USER_PICTURE='img/yo.jpg'
+LOGO='img/logo_lion.svg'
+
+
 @app.route('/data/', methods=['POST', 'GET'])
 def data():
+
+    global USER_PICTURE, LOGO
 
     df = pd.read_parquet('data/sample_data.parquet')
 
     return render_template('data.html',
-                           user_picture='USER_PICTURE',
-                           logo='LOGO',
+                           user_picture=USER_PICTURE,
+                           logo=LOGO,
                            tables=[HTML(df.to_html(classes='dataframe',
                                                     header=True,
                                                     index=False,
@@ -29,18 +36,21 @@ def data():
 @app.route('/demand/', methods=['POST', 'GET'])
 def demand():
 
+    global USER_PICTURE, LOGO
+
     if request.method == 'POST':
         s_metric = request.form['metric']
+        s_plot = request.form['plot']
 
     else:
-        s_metric = 'Time_series_bar'
+        s_metric = 'extracash'
+        s_plot = 'demand'
 
-    graph = ''
+    graph = PLOT_FUNCTIONS[s_plot](s_metric)
         
     return render_template('demand.html',
-                           user_picture='USER_PICTURE',
-                           logo='LOGO',
-                           links='LINKS',
+                           user_picture=USER_PICTURE,
+                           logo=LOGO,
                            graphJSON=graph,
                            metrics=HTML_SELECTOR['METRIC'],
                            metrics_len=len(HTML_SELECTOR['METRIC']),
@@ -48,39 +58,23 @@ def demand():
                                           for e in HTML_SELECTOR['METRIC']],
                            s_metric=s_metric,
                            front_s_metric=s_metric.replace('_', ' '),
+                           plots=HTML_SELECTOR['PLOTS'],
+                           plots_len=len(HTML_SELECTOR['PLOTS']),
+                           front_plots=[e.replace('_', ' ')
+                                          for e in HTML_SELECTOR['PLOTS']],
+                           s_plot=s_plot,
+                           front_s_plot=s_plot.replace('_', ' '),
                           )
 
-@app.route('/profit/', methods=['POST', 'GET'])
-def profit():
 
-    if request.method == 'POST':
-        s_metric = request.form['metric']
-
-    else:
-        s_metric = 'Time_series_bar'
-
-    graph = ''
-        
-    return render_template('profit.html',
-                           user_picture='USER_PICTURE',
-                           logo='LOGO',
-                           links='LINKS',
-                           graphJSON=graph,
-                           metrics=HTML_SELECTOR['METRIC'],
-                           metrics_len=len(HTML_SELECTOR['METRIC']),
-                           front_metrics=[e.replace('_', ' ')
-                                          for e in HTML_SELECTOR['METRIC']],
-                           s_metric=s_metric,
-                           front_s_metric=s_metric.replace('_', ' '),
-                          )
 
 @app.route('/', methods=['POST', 'GET'])
 def about():
-    global USER_PICTURE, LOGO, LINKS
+    global USER_PICTURE, LOGO
 
     return render_template('about.html',
-                           user_picture='USER_PICTURE',
-                           logo='LOGO',
+                           user_picture=USER_PICTURE,
+                           logo=LOGO,
                            )
 
 
