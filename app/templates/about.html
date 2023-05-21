@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+    <link rel="icon" type="image/svg" href="{{ url_for('static', filename=logo) }}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>
+        Dynamic Pricing
+    </title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+          name='viewport'/>
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <!-- CSS Files -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet"/>
+    <link href="{{ url_for('static', filename='css/paper-dashboard.css') }}" rel="stylesheet"/>
+    <link href="{{ url_for('static', filename='css/pathfinder.css') }}" rel="stylesheet"/>
+</head>
+
+<body class="">
+<div class="wrapper ">
+    <div class="sidebar" data-color="white" data-active-color="danger">
+        <div class="logo">
+            <a href="" class="simple-text logo-mini"></a>
+            <a href="/" class="simple-text logo-normal">
+                <div class="logo-image-big" style="position: relative; left: 10px">
+                    <img src="{{ url_for('static', filename=logo) }}" width="100" height="100">
+                </div>
+                <div style="position: relative; left: 23px">Pricing</div>
+            </a>
+        </div>
+        <div class="sidebar-wrapper">
+            <ul class="nav">
+                <li>
+                    <a href="/data">
+                        <i class="nc-icon nc-app"></i>
+                        <p class="capitalize">Sample Data</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="/demand">
+                        <i class="nc-icon nc-credit-card"></i>
+                        <p class="capitalize">Demand</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="/profit">
+                        <i class="nc-icon nc-money-coins"></i>
+                        <p class="capitalize">Profit</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="main-panel" style="height: 100vh;">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
+            <div class="container-fluid">
+                <div class="navbar-wrapper">
+                    <div class="navbar-toggle">
+                        <button type="button" class="navbar-toggler">
+                            <span class="navbar-toggler-bar bar1"></span>
+                            <span class="navbar-toggler-bar bar2"></span>
+                            <span class="navbar-toggler-bar bar3"></span>
+                        </button>
+                    </div>
+                    <a class="navbar-brand" href="javascript:;">
+                        <i class="nc-icon nc-zoom-split"></i>
+                        <p class="capitalize">About</p>
+                    </a>
+                </div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+                        aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-bar navbar-kebab"></span>
+                    <span class="navbar-toggler-bar navbar-kebab"></span>
+                    <span class="navbar-toggler-bar navbar-kebab"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                    <ul class="navbar-nav">
+                        <li class="nav-item btn-rotate dropdown">
+                            <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="{{ url_for('static', filename=user_picture) }}" width="45" height="45">
+                                <p>
+                                    <span class="d-lg-none d-md-block">Some Actions</span>
+                                </p>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="/">about</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- End Navbar -->
+        <div class="content">
+            <div class="row">
+                <h3 class="description"></h3>
+                <h5>What is PathFinder?</h5>
+
+                <div class="col-md-12">
+                    <p>Pathfinder is a
+                        <text style="font-weight: bold;">tool</text>
+                        for IT job market exploring. With PathFinder we can answer this kind of questions:
+                    </p>
+                    <ul>
+                        <li>How the IT job market behaves?</li>
+                        <li>What the job market needs?</li>
+                        <li>How a student could enter job market?</li>
+                        <li>Which are the top companies?</li>
+                        <li>How plan a career path?</li>
+                    </ul>
+                    <p>PathFinder allow us to explore the market in terms of job positions, companies, salaries, job
+                        skills and even the time intelligence needed for planning all kind of experiments.</p>
+                    <p>We are trying to access IT job market with IT job market data.</p>
+                </div>
+
+                <div class="col-md-12">
+                    <p>  </p>
+                </div>
+
+                <h5>How did it start?</h5>
+                <div class="col-md-12">
+                    <p>This tool started as a solution for hiring/recruitment staff.
+                        The original purpose was saving time while
+                        scrolling down job web pages. With this approach, the first version was born. From the moment
+                        this feature was achieved, we made the next steps for analyzing the whole IT job market.
+                        Now we can access positions data, companies data, skills data and much more.
+
+                    </p>
+
+                </div>
+
+                <div class="col-md-12">
+                    <p>  </p>
+                </div>
+
+                <h5>Our Goal</h5>
+                <div class="col-md-12">
+                    <p>Our path is to centralize all IT job market data in just one place.
+                    </p>
+                    <ul>
+                        <li>With the job market data in our hand we can analyze and improve all our market actions.</li>
+                        <li>With companies' data in our hands we can achieve best partners.</li>
+                        <li>With skills data in our hands we can instruct people with the necessary capabilities to enter the market.</li>
+                    </ul>
+                    <p>Our purpose is to have all this tools in one click..
+                    </p>
+                </div>
+                <div class="col-md-12">
+                    <p>  </p>
+                </div>
+
+                <!--<h5>About Me</h5>
+                <div class="col-md-12">
+                    <p>My name is <a href="https://www.linkedin.com/in/yonatan-rodriguez/" target="_blank">Yonatan Rodriguez</a>
+                        and I'm a data scientist, engineer and developer, always trying to do my best. 
+                    </p>
+
+                </div>-->
+            </div>
+        </div>
+        <footer class="footer" style="position: absolute; bottom: 0; width: -webkit-fill-available;">
+            <div class="container-fluid">
+                <div class="row">
+                    <nav class="footer-nav">
+                    </nav>
+                    <div class="credits ml-auto">
+              <span class="copyright">
+                © 2023, made with <i class="fa fa-binoculars"></i> by Yona <i class="fa fa-flask"></i>
+              </span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+<!--   Core JS Files   -->
+<script src="{{ url_for('static', filename='js/core/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/core/popper.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/core/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/core/selector_fix.js') }}"></script>
+<script src="{{ url_for('static', filename='js/plugins/perfect-scrollbar.jquery.min.js') }}"></script>
+<!-- Chart JS -->
+<script src="{{ url_for('static', filename='js/plugins/chartjs.min.js') }}"></script>
+<!--  Notifications Plugin    -->
+<script src="{{ url_for('static', filename='js/plugins/bootstrap-notify.js') }}"></script>
+<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+<script src="{{ url_for('static', filename='js/paper-dashboard.min.js') }}" type="text/javascript"></script>
+
+</body>
+
+</html>
