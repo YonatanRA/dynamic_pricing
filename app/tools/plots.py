@@ -22,7 +22,7 @@ def demand_plot(product):
 
     df_plot = pd.DataFrame()
     df_plot['Price'] = x
-    df_plot['Demand'] = np.exp(prod['alpha']*x + prod['beta'])
+    df_plot['Demand'] = np.exp(prod['alpha']*x + prod['beta'])*100
 
     title = f'Demand function of {product.title()} with average price {prod["mean"]} and demand {round(df_plot[df_plot.Price==round(prod["mean"])].values[0][1], 2)}'
 
@@ -42,13 +42,16 @@ def profit_plot(product):
 
     df_plot = pd.DataFrame()
     df_plot['Price'] = x
-    df_plot['Demand'] = np.exp(prod['alpha']*x + prod['beta'])
-    df_plot['Profit'] = df_plot.Price * df_plot.Demand*100
+    df_plot['Demand'] = np.exp(prod['alpha']*x + prod['beta'])*100
+    df_plot['Profit'] = df_plot.Price * df_plot.Demand
 
     product_title = product.title()
-    profit_title = round(df_plot[df_plot.Price==round(prod["mean"])].values[0][2], 2)
-    best_price_title = df_plot[df_plot.Profit==df_plot.Profit.max()].Price.values[0]
-    best_profit_title = round(df_plot[df_plot.Profit==df_plot.Profit.max()].values[0][2], 2)
+    profit_title = round(
+        df_plot[df_plot.Price == round(prod["mean"])].values[0][2], 2)
+    best_price_title = df_plot[df_plot.Profit ==
+                               df_plot.Profit.max()].Price.values[0]
+    best_profit_title = round(
+        df_plot[df_plot.Profit == df_plot.Profit.max()].values[0][2], 2)
     increment = round((best_profit_title - profit_title) / profit_title, 2)
 
     title = f'Profit function of {product_title} with average price {prod["mean"]} and profit {profit_title} -- Best Price {best_price_title} with and profit {best_profit_title} -- {increment}% increment'

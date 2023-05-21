@@ -8,14 +8,14 @@ from tools.plots import PLOT_FUNCTIONS
 
 import os
 
-PATH=os.path.dirname(os.path.abspath(__file__))
+PATH = os.path.dirname(os.path.abspath(__file__))
 
 app = Flask(__name__)
 app.secret_key = 'database_key'
 
 
-USER_PICTURE='img/yo.jpg'
-LOGO='img/logo_lion.svg'
+USER_PICTURE = 'img/yo.jpg'
+LOGO = 'img/logo_lion.svg'
 
 
 @app.route('/data/', methods=['POST', 'GET'])
@@ -29,11 +29,11 @@ def data():
                            user_picture=USER_PICTURE,
                            logo=LOGO,
                            tables=[HTML(df.to_html(classes='dataframe',
-                                                    header=True,
-                                                    index=False,
-                                                    escape=False,
-                                                    render_links=True
-                                                              ))])
+                                                   header=True,
+                                                   index=False,
+                                                   escape=False,
+                                                   render_links=True
+                                                   ))])
 
 
 @app.route('/demand/', methods=['POST', 'GET'])
@@ -50,7 +50,7 @@ def demand():
         s_plot = 'demand'
 
     graph = PLOT_FUNCTIONS[s_plot](s_metric)
-        
+
     return render_template('demand.html',
                            user_picture=USER_PICTURE,
                            logo=LOGO,
@@ -64,11 +64,10 @@ def demand():
                            plots=HTML_SELECTOR['PLOTS'],
                            plots_len=len(HTML_SELECTOR['PLOTS']),
                            front_plots=[e.replace('_', ' ')
-                                          for e in HTML_SELECTOR['PLOTS']],
+                                        for e in HTML_SELECTOR['PLOTS']],
                            s_plot=s_plot,
                            front_s_plot=s_plot.replace('_', ' '),
-                          )
-
+                           )
 
 
 @app.route('/', methods=['POST', 'GET'])
