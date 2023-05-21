@@ -6,6 +6,9 @@ from flask import Flask, render_template, request
 from tools.html_selector import HTML_SELECTOR
 from tools.plots import PLOT_FUNCTIONS
 
+import os
+
+PATH=os.path.dirname(os.path.abspath(__file__))
 
 app = Flask(__name__)
 app.secret_key = 'database_key'
@@ -18,9 +21,9 @@ LOGO='img/logo_lion.svg'
 @app.route('/data/', methods=['POST', 'GET'])
 def data():
 
-    global USER_PICTURE, LOGO
+    global USER_PICTURE, LOGO, PATH
 
-    df = pd.read_parquet('data/sample_data.parquet')
+    df = pd.read_parquet(PATH + '/data/sample_data.parquet')
 
     return render_template('data.html',
                            user_picture=USER_PICTURE,
