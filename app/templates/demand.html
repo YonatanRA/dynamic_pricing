@@ -24,7 +24,7 @@
         <div class="sidebar" data-color="white" data-active-color="danger">
             <div class="logo">
 
-                <a href="/" class="simple-text logo-normal">
+                <a href="/dashboard/" class="simple-text logo-normal">
                     <div class="logo-image-big" style="position: relative; left: 30px">
                         <img src="{{ url_for('static', filename=logo) }}" width="180" height="150">
                     </div>
@@ -33,6 +33,12 @@
             </div>
             <div class="sidebar-wrapper">
                 <ul class="nav">
+                    <li>
+                        <a href="/dashboard">
+                            <i class="nc-icon nc-tv-2"></i>
+                            <p class="capitalize">DashBoard</p>
+                        </a>
+                    </li>
                     <li>
                         <a href="/data">
                             <i class="nc-icon nc-app"></i>
@@ -44,6 +50,7 @@
                             <i class="nc-icon nc-credit-card"></i>
                             <p class="capitalize">Demand / Profit</p>
                         </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -78,12 +85,10 @@
                                     id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false">
                                     <img src="{{ url_for('static', filename=user_picture) }}" width="80" height="50">
-                                    <p>
-                                        <span class="d-lg-none d-md-block">Some Actions</span>
-                                    </p>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="/">about</a>
+                                    <a class="dropdown-item" href="/about/">about</a>
+                                    <a class="dropdown-item" href="/logout/">logout</a>
                                 </div>
                             </li>
                         </ul>

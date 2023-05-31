@@ -1,7 +1,7 @@
 
 import pandas as pd
 from IPython.display import HTML
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, url_for, redirect, session
 
 from tools.html_selector import HTML_SELECTOR
 from tools.plots import PLOT_FUNCTIONS
@@ -18,10 +18,70 @@ USER_PICTURE = 'img/yo.jpg'
 LOGO = 'img/logo_lion.svg'
 
 
+@app.route('/', methods=['POST', 'GET'])
+def login():
+
+    if session.get('email') and session.get('password'):
+        return redirect('/dashboard', code=302)
+
+    if request.method == 'POST':
+
+        name = request.form['email']
+        password = request.form['password']
+        # login
+       
+        if name != '' and password != '':
+            session['email'] = name
+            session['password'] = password
+            return redirect(url_for('dashboard'))
+        else:
+            return render_template('login.html')
+
+
+    return render_template('login.html')
+
+
+@app.route('/logout/', methods=['POST', 'GET'])
+def logout():
+
+    session.pop('email', None)
+    session.pop('password', None)
+
+    session.clear()
+    return redirect(url_for('login'))
+
+
+@app.route('/dashboard/', methods=['POST', 'GET'])
+def dashboard():
+
+    if session.get('email') is None or session.get('password') is None:
+        return redirect('/', code=302)
+    
+
+    n_companies=10
+    average_daily_jobs=3
+    average_lifetime_jobs=1
+    salaries='hola'
+    
+
+    return render_template('dashboard.html',
+                           user_picture=USER_PICTURE,
+                           logo=LOGO,
+                           n_companies=n_companies,
+                           average_daily_jobs=average_daily_jobs,
+                           average_lifetime_jobs=average_lifetime_jobs,
+                           salaries=salaries,
+                           graphJSON='',
+                           plotgraphJSON='')
+
+
 @app.route('/data/', methods=['POST', 'GET'])
 def data():
 
-    global USER_PICTURE, LOGO, PATH
+    global USER_PICTURE, LOGO
+
+    if session.get('email') is None or session.get('password') is None:
+        return redirect('/', code=302)
 
     df = pd.read_parquet(PATH + '/data/sample_data.parquet')
 
@@ -41,13 +101,16 @@ def demand():
 
     global USER_PICTURE, LOGO
 
+    if session.get('email') is None or session.get('password') is None:
+        return redirect('/', code=302)
+
     if request.method == 'POST':
         s_metric = request.form['metric']
         s_plot = request.form['plot']
 
     else:
         s_metric = 'extracash'
-        s_plot = 'demand'
+        s_plot = 'both'
 
     graph = PLOT_FUNCTIONS[s_plot](s_metric)
 
@@ -70,9 +133,13 @@ def demand():
                            )
 
 
-@app.route('/', methods=['POST', 'GET'])
+@app.route('/about/', methods=['POST', 'GET'])
 def about():
+
     global USER_PICTURE, LOGO
+
+    if session.get('email') is None or session.get('password') is None:
+        return redirect('/', code=302)
 
     return render_template('about.html',
                            user_picture=USER_PICTURE,
