@@ -146,6 +146,17 @@ def about():
                            logo=LOGO,
                            )
 
+@app.route('/clients/', methods=['POST', 'GET'])
+def clients():
+    global USER_PICTURE, LOGO
+
+    if session.get('email') is None or session.get('password') is None:
+        return redirect('/', code=302)
+
+    return render_template('clients.html',
+                           user_picture=USER_PICTURE,
+                           logo=LOGO,
+                           )
 
 if __name__ == '__main__':
     app.run(debug=True, port=5006)
