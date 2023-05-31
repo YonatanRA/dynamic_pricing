@@ -7,10 +7,14 @@ from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 import plotly.express as px
 
+import os
 
-PRODUCTS = {'surrogate': {'alpha': -0.02473518, 'beta': 5.47213038, 'mean': 28.8},
-            'extracash': {'alpha': -0.05629794, 'beta': 5.64341742, 'mean': 21.85},
-            'plussurrogate': {'alpha': -0.22629794, 'beta': 5.64341742, 'mean': 6.4}
+PATH = os.path.dirname(os.path.abspath(__file__))
+
+
+PRODUCTS = {'purchase': {'alpha': -0.02473518, 'beta': 5.47213038, 'mean': 28.8},
+            'cash': {'alpha': -0.05629794, 'beta': 5.64341742, 'mean': 21.85},
+            'debt': {'alpha': -0.22629794, 'beta': 5.64341742, 'mean': 6.4}
             }
 
 x = np.linspace(1, 100, 1000)
@@ -181,7 +185,39 @@ def both_plot(product):
     return json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
 
 
+def line_overview():
+
+    df_plot = pd.read_parquet(PATH + '/../data/line_plot.parquet')
+    
+    fig = px.area(df_plot, x='date', y='# Count', title='', width=950, height=450)
+
+    fig.update_layout({'plot_bgcolor': 'rgba(0, 0, 0, 0)',
+                      'paper_bgcolor': 'rgba(0, 0, 0, 0)'})
+
+    fig.update_traces(marker_color='#1966AD', stackgroup=None, fillcolor='#1966AD',
+                      fill='none', hoveron='points+fills')
+    
+    return json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+
+
+def tree_overview():
+
+    df_plot = pd.read_parquet(PATH + '/../data/tree_plot.parquet')
+    
+    fig = px.sunburst(df_plot, path=[px.Constant('All'), 'segment', 'clients'], values='clients', color='clients',
+                    color_continuous_scale='blues', width=500, height=500, title='')
+
+    fig.update_layout({'plot_bgcolor': 'rgba(0, 0, 0, 0)',
+                      'paper_bgcolor': 'rgba(0, 0, 0, 0)'})
+
+    
+    return json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+
+
+
 PLOT_FUNCTIONS = {'demand': demand_plot,
                   'profit': profit_plot,
-                  'both': both_plot,
+                  'd/p': both_plot,
+                  'line_overview': line_overview,
+                  'tree_overview': tree_overview,
                   }

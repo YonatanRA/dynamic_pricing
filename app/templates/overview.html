@@ -24,7 +24,7 @@
         <div class="sidebar" data-color="white" data-active-color="danger">
             <div class="logo">
 
-                <a href="/dashboard/" class="simple-text logo-normal">
+                <a href="/overview/" class="simple-text logo-normal">
                     <div class="logo-image-big" style="position: relative; left: 30px">
                         <img src="{{ url_for('static', filename=logo) }}" width="180" height="150">
                     </div>
@@ -34,9 +34,9 @@
             <div class="sidebar-wrapper">
                 <ul class="nav">
                     <li class="active ">
-                        <a href="/dashboard">
+                        <a href="/overview">
                             <i class="nc-icon nc-tv-2"></i>
-                            <p class="capitalize">DashBoard</p>
+                            <p class="capitalize">Overview</p>
                         </a>
                     </li>
                     <li>
@@ -74,7 +74,7 @@
                         </div>
                         <a class="navbar-brand" href="">
                             <i class="nc-icon nc-tv-2"></i>
-                            <p class="capitalize">DashBoard</p>
+                            <p class="capitalize">Overview</p>
                         </a>
                     </div>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
@@ -114,8 +114,35 @@
                                     </div>
                                     <div class="col-7 col-md-8">
                                         <div class="numbers">
-                                            <p class="card-category">Daily IT Positions</p>
+                                            <p class="card-category">Total Credit Cards</p>
                                             <p class="card-title">{{average_daily_jobs}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer ">
+                                <hr>
+                                <div class="stats">
+                                    <i class="fa fa-refresh"></i>
+                                    Update Now
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="card card-stats">
+                            <div class="card-body ">
+                                <div class="row">
+                                    <div class="col-5 col-md-4">
+                                        <div class="icon-big text-center icon-warning">
+                                            <i class="nc-icon nc-vector text-danger"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-7 col-md-8">
+                                        <div class="numbers">
+                                            <p class="card-category">Total Clients</p>
+                                            <p class="card-title">{{n_companies}}
+                                            <p>
                                         </div>
                                     </div>
                                 </div>
@@ -140,35 +167,8 @@
                                     </div>
                                     <div class="col-7 col-md-8">
                                         <div class="numbers">
-                                            <p class="card-category">Median IT Salary</p>
+                                            <p class="card-category">Credit Card Profit</p>
                                             <p class="card-title">{{salaries}}€
-                                            <p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-footer ">
-                                <hr>
-                                <div class="stats">
-                                    <i class="fa fa-refresh"></i>
-                                    deprecated from 2022-12-01
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="card card-stats">
-                            <div class="card-body ">
-                                <div class="row">
-                                    <div class="col-5 col-md-4">
-                                        <div class="icon-big text-center icon-warning">
-                                            <i class="nc-icon nc-vector text-danger"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-7 col-md-8">
-                                        <div class="numbers">
-                                            <p class="card-category">Total IT Companies</p>
-                                            <p class="card-title">{{n_companies}}
                                             <p>
                                         </div>
                                     </div>
@@ -189,13 +189,13 @@
                                 <div class="row">
                                     <div class="col-5 col-md-4">
                                         <div class="icon-big text-center icon-warning">
-                                            <i class="nc-icon nc-time-alarm text-primary"></i>
+                                            <i class="nc-icon nc-diamond text-primary"></i>
                                         </div>
                                     </div>
                                     <div class="col-7 col-md-8">
                                         <div class="numbers">
-                                            <p class="card-category">Average Job Lifetime</p>
-                                            <p class="card-title">{{average_lifetime_jobs}}
+                                            <p class="card-category">Estimated Increment</p>
+                                            <p class="card-title">{{average_lifetime_jobs}}%
                                             <p>
                                         </div>
                                     </div>
@@ -215,12 +215,12 @@
                     <div class="col-md-4">
                         <div class="card ">
                             <div class="card-header">
-                                <h5 class="card-title">Last Quarter Open Positions</h5>
-                                <p class="card-category">Bootcamps</p>
+                                <h5 class="card-title">Clients by Segment</h5>
+                                <p class="card-category"></p>
                             </div>
                             <div class="card-body">
                                 <div id='sun' class='chart'
-                                    style="width: 450px; height: 317px; position: relative; right: 73px; bottom: 115px;">
+                                    style="width: 450px; height: 350px; position: relative; right: 73px; bottom: 65px;">
 
                                     <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
                                     <script type='text/javascript'>
@@ -244,12 +244,12 @@
                     <div class="col-md-8">
                         <div class="card card-chart">
                             <div class="card-header">
-                                <h5 class="card-title">Daily Open Positions</h5>
-                                <p class="card-category">Comparative</p>
+                                <h5 class="card-title">Credit Card Monthly Operations</h5>
+                                <p class="card-category"></p>
                             </div>
-                            <div class="card-body" style="height: 350px; position: relative;">
+                            <div class="card-body" style="height: 373px; position: relative;">
                                 <div id='chart' class='chart'
-                                    style="width: 900px; height: 400px; position: relative; right: 60px; bottom: 110px;">
+                                    style="width: 950px; height: 400px; position: relative; right: 10px; bottom: 25px;">
 
                                     <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
                                     <script type='text/javascript'>

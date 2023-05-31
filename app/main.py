@@ -18,6 +18,9 @@ USER_PICTURE = 'img/yo.jpg'
 LOGO = 'img/logo_lion.svg'
 
 
+# purchase cash y debt
+
+
 @app.route('/', methods=['POST', 'GET'])
 def login():
 
@@ -29,14 +32,13 @@ def login():
         name = request.form['email']
         password = request.form['password']
         # login
-       
+
         if name != '' and password != '':
             session['email'] = name
             session['password'] = password
             return redirect(url_for('dashboard'))
         else:
             return render_template('login.html')
-
 
     return render_template('login.html')
 
@@ -51,28 +53,29 @@ def logout():
     return redirect(url_for('login'))
 
 
-@app.route('/dashboard/', methods=['POST', 'GET'])
-def dashboard():
+@app.route('/overview/', methods=['POST', 'GET'])
+def overview():
 
     if session.get('email') is None or session.get('password') is None:
         return redirect('/', code=302)
-    
 
-    n_companies=10
-    average_daily_jobs=3
-    average_lifetime_jobs=1
-    salaries='hola'
-    
+    average_daily_jobs = 423352
+    n_companies = 390350
+    salaries = 186324.61
+    average_lifetime_jobs = 5.23
 
-    return render_template('dashboard.html',
+    graphJSON = PLOT_FUNCTIONS['line_overview']()
+    plotgraphJSON = PLOT_FUNCTIONS['tree_overview']()
+    
+    return render_template('overview.html',
                            user_picture=USER_PICTURE,
                            logo=LOGO,
                            n_companies=n_companies,
                            average_daily_jobs=average_daily_jobs,
                            average_lifetime_jobs=average_lifetime_jobs,
                            salaries=salaries,
-                           graphJSON='',
-                           plotgraphJSON='')
+                           graphJSON=graphJSON,
+                           plotgraphJSON=plotgraphJSON)
 
 
 @app.route('/data/', methods=['POST', 'GET'])
@@ -109,8 +112,8 @@ def demand():
         s_plot = request.form['plot']
 
     else:
-        s_metric = 'extracash'
-        s_plot = 'both'
+        s_metric = 'cash'
+        s_plot = 'd/p'
 
     graph = PLOT_FUNCTIONS[s_plot](s_metric)
 
@@ -146,6 +149,7 @@ def about():
                            logo=LOGO,
                            )
 
+
 @app.route('/clients/', methods=['POST', 'GET'])
 def clients():
     global USER_PICTURE, LOGO
@@ -157,6 +161,7 @@ def clients():
                            user_picture=USER_PICTURE,
                            logo=LOGO,
                            )
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5006)
