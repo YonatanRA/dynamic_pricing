@@ -212,37 +212,9 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4">
-                        <div class="card ">
-                            <div class="card-header">
-                                <h5 class="card-title">Clients by Segment</h5>
-                                <p class="card-category"></p>
-                            </div>
-                            <div class="card-body">
-                                <div id='sun' class='chart'
-                                    style="width: 450px; height: 350px; position: relative; right: 73px; bottom: 65px;">
-
-                                    <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
-                                    <script type='text/javascript'>
-                                        var graphs = {{ plotgraphJSON | safe}};
-                                        Plotly.plot('sun', graphs, {});
-
-                                    </script>
-
-                                </div>
-                            </div>
-                            <div class="card-footer">
-
-                                <hr>
-                                <div class="stats">
-                                    <i class="fa fa-refresh"></i>
-                                    Update now
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
                     <div class="col-md-8">
-                        <div class="card card-chart">
+                        <div class="card card-chart" style="width: 1360px; position: relative;">
                             <div class="card-header">
                                 <h5 class="card-title">Credit Card Monthly Operations</h5>
                                 <p class="card-category"></p>

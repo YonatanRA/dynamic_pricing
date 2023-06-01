@@ -105,6 +105,59 @@
             <!-- End Navbar -->
             <div class="content">
                 <!-- CONTENIDO AQUI -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="description">
+                            <div class="btn-wrapper">
+                                <form id='submit_params' method="POST" action="{{ url_for('clients') }}">
+
+                                    <label for="client" class="" style="color: black; text-indent: -44px;">
+                                        <div class="selector">Client</div><select class="metric" id="client"
+                                            aria-labelledby="navbarDropdownMenuLink" name="client" type="submit">
+
+                                            <option value="{{s_client}}" selected>{{s_client}}</option>
+                                            {%for i in range(0, client_len)%}
+                                            <option value={{clients[i]}}>{{clients[i]}}</option>
+                                            {%endfor%}
+
+                                        </select>
+                                    </label>
+
+                                    <label for="metric" class="" style="color: black; text-indent: -44px;">
+                                        <div class="selector">Product</div><select class="metric" id="metric"
+                                            aria-labelledby="navbarDropdownMenuLink" name="metric" type="submit">
+
+                                            <option value="{{s_metric}}" selected>{{front_s_metric}}</option>
+                                            {%for i in range(0, metrics_len)%}
+                                            <option value={{metrics[i]}}>{{front_metrics[i]}}</option>
+                                            {%endfor%}
+
+                                        </select>
+                                    </label>
+
+                                    <button href="" class="btn btn-primary btn-darkblue" type="submit"
+                                        style="left: 50px;">
+                                        Filter
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                        <h3 class="description"></h3>
+
+                        <div id='chart' class='chart' style="width: 1390px; height: 600px;">
+                            <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+                            <script type='text/javascript'>
+                                var graphs = {{ graphJSON | safe}};
+                                Plotly.plot('chart', graphs, {});
+
+
+                            </script>
+
+                        </div>
+
+
+                    </div>
+                </div>
             </div>
             <footer class="footer" style="position: absolute; bottom: 0; width: -webkit-fill-available;">
                 <div class="container-fluid">

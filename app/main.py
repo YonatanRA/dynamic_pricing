@@ -25,7 +25,7 @@ LOGO = 'img/logo_lion.svg'
 def login():
 
     if session.get('email') and session.get('password'):
-        return redirect('/dashboard', code=302)
+        return redirect('/overview', code=302)
 
     if request.method == 'POST':
 
@@ -36,7 +36,7 @@ def login():
         if name != '' and password != '':
             session['email'] = name
             session['password'] = password
-            return redirect(url_for('dashboard'))
+            return redirect(url_for('overview'))
         else:
             return render_template('login.html')
 
@@ -65,7 +65,6 @@ def overview():
     average_lifetime_jobs = 5.23
 
     graphJSON = PLOT_FUNCTIONS['line_overview']()
-    plotgraphJSON = PLOT_FUNCTIONS['tree_overview']()
     
     return render_template('overview.html',
                            user_picture=USER_PICTURE,
@@ -75,7 +74,7 @@ def overview():
                            average_lifetime_jobs=average_lifetime_jobs,
                            salaries=salaries,
                            graphJSON=graphJSON,
-                           plotgraphJSON=plotgraphJSON)
+                           )
 
 
 @app.route('/data/', methods=['POST', 'GET'])
@@ -157,9 +156,29 @@ def clients():
     if session.get('email') is None or session.get('password') is None:
         return redirect('/', code=302)
 
+    if request.method == 'POST':
+        s_client = request.form['client']
+        s_metric = request.form['metric']
+
+    else:
+        s_client = '123982'
+        s_metric = 'cash'
+
+    graph = PLOT_FUNCTIONS['client'](s_metric, s_client)
+
     return render_template('clients.html',
                            user_picture=USER_PICTURE,
                            logo=LOGO,
+                           graphJSON=graph,
+                           metrics=HTML_SELECTOR['METRIC'],
+                           metrics_len=len(HTML_SELECTOR['METRIC']),
+                           front_metrics=[e.replace('_', ' ')
+                                          for e in HTML_SELECTOR['METRIC']],
+                           s_metric=s_metric,
+                           front_s_metric=s_metric.replace('_', ' '),
+                           s_client=s_client,
+                           clients = ['043534', '043563', '123982', '293498'],
+                           client_len = 4,
                            )
 
 
